@@ -1,0 +1,48 @@
+var noms = document.getElementById("mnoms").value;
+    var pnoms = document.getElementById("mpnoms").value;
+    var mails = document.getElementById("mmails").value;
+    var adrs = document.getElementById("madrs").value;
+    var tels = document.getElementById("mtels").value;
+    var dateff = null, datech = null;
+    var av = 70;
+  alert ('verification');
+    if (window.XMLHttpRequest) {
+        xhr = new XMLHttpRequest();
+    }
+    else if (window.ActiveXObject) {
+        xhr = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    if (rp == 1) {//Souscripteur uniquement
+
+
+        if (noms && pnoms && adrs) {
+            document.getElementById("btnsousv").disabled = true;
+            xhr.open("GET", "php/avenant/nmodif.php?code=" + code + "&nom=" + noms + "&pnom=" + pnoms + "&adr=" + adrs + "&mail=" + mails + "&tel=" + tels + "&cod_sous=" + sous, false);
+            xhr.send(null);
+            $("#content").load("php/avenant/mpaiement.php?code=" + code + "&page=" + page + "&av=" + av);
+        } else {alert("Veuillez Remplir tous les champs obligatoire (*) !"); }
+    }
+    else {//Souscripteur et assuré
+        var noma = document.getElementById("mnoma").value;
+        var pnoma = document.getElementById("mpnoma").value;
+        var maila = document.getElementById("mmaila").value;
+        var adra = document.getElementById("madra").value;
+        var tela = document.getElementById("mtela").value;
+        var cod_sousa = '<?php echo $cod_sousa;?>';
+        if (noms && pnoms && adrs && noma && pnoma && adra) {
+            document.getElementById("btnsousv").disabled = true;
+            xhr.open("GET", "php/avenant/nmodif.php?code=" + code + "&nom=" + noms + "&pnom=" + pnoms + "&adr=" + adrs + "&mail=" + mails + "&tel=" + tels + "&cod_sous=" + sous, false);
+            xhr.send(null);
+            if (window.XMLHttpRequest) {
+                xhr = new XMLHttpRequest();
+            }
+            else if (window.ActiveXObject) {
+                xhr = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xhr.open("GET", "php/avenant/nmodif.php?code=" + code + "&nom=" + noma + "&pnom=" + pnoma + "&adr=" + adra + "&mail=" + maila + "&tel=" + tela + "&cod_sous=" + cod_sousa, false);
+            xhr.send(null);
+            $("#content").load("php/avenant/mpaiement.php?code=" + code + "&page=" + page + "&av=" + av);
+        } else {alert("Veuillez Remplir tous les champs obligatoire (*) !");}
+    }
+}

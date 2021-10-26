@@ -1,0 +1,9 @@
+$bdd->prepare(
+$rqtc->execute();
+$rqtc->rowCount();
+$bdd->prepare(
+
+ $rqt->execute();
+$rqt->rowCount();
+
+$rqt->fetch()
